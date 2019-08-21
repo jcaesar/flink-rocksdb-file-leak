@@ -19,7 +19,6 @@ RUN mv target/file-leak-*.jar /core/job.jar
 
 FROM scratch as install
 COPY ./flink/common /common
-COPY ./flink/flink-runscript /flink-runscript
 COPY ./core/runscript /
 COPY --from=build /core/job.jar /
 

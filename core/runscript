@@ -20,7 +20,6 @@ slots_per_tm=$((($j - 1) / $tm_count + 1))
 waitforport namenode1 9820
 
 sed -i -e "s/jobmanager.rpc.address: localhost/jobmanager.rpc.address: jobmanager1/g" "$FLINK_HOME/conf/flink-conf.yaml"
-/job/flink-runscript true # Would be nice if this did the config for us, but I think it does nothing.
 
 # go!
 exec flink run -p $j job.jar
