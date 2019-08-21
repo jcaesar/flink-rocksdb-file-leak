@@ -1,0 +1,25 @@
+CORE_CONF_fs_defaultFS=hdfs://namenode1:9820
+CORE_CONF_hadoop_http_staticuser_user=root
+CORE_CONF_hadoop_proxyuser_hue_hosts=*
+CORE_CONF_hadoop_proxyuser_hue_groups=*
+
+HDFS_CONF_dfs_hosts=
+HDFS_CONF_dfs_webhdfs_enabled=true
+HDFS_CONF_dfs_permissions_enabled=false
+HDFS_CONF_dfs_namenode_rpc___address=namenode1:9820
+HDFS_CONF_dfs_namenode_http___address=namenode1:50070
+HDFS_CONF_dfs_ha_fencing_methods=shell(/bin/true)
+HDFS_CONF_dfs_ha_automatic___failover_enabled=true
+HDFS_CONF_ha_zookeeper_quorum=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+HDFS_CONF_ipc_maximum_data_length=134217728
+HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname___check=false
+HDFS_CONF_dfs_namenode_replication_considerLoad=false
+HDFS_CONF_dfs_client_block_write_replace___datanode___on___failure_policy=default
+HDFS_CONF_dfs_client_block_write_replace___datanode___on___failure_best___effort=true
+HDFS_CONF_dfs_client_block_write_replace___datanode___on___failure_enable=true
+
+HADOOP_NAMENODE_OPTS=-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1099
+HADOOP_DATANODE_OPTS=-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1099
+HADOOP_JOURNALNODE_OPTS=-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1099
+
+

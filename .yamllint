@@ -1,0 +1,17 @@
+# Extend at will! (Linters exist to catch involintary errors)
+
+extends: default
+
+rules:
+  line-length: disable
+  comments-indentation: disable
+  document-start: disable
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+  brackets:
+    max-spaces-inside: 1
+
+ignore: |
+  /flink/flink-conf.yaml

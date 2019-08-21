@@ -1,0 +1,5 @@
+# Ignore unspecified versions on packages. TODO
+ignored:
+  - DL3028
+  - DL3018
+  - DL3008

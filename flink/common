@@ -1,0 +1,57 @@
+#!/usr/bin/env false
+
+function alladdrs {
+	for r in tasks."$1" "$1"; do
+		if timeout 1 dig -tA +short "$r" | grep -v -e '^$'; then
+			return 0
+		fi
+	done
+	return 0
+}
+
+function waitforhosts {
+	ADDR="${1}"
+	N="${2}"
+	while true; do
+		n=0
+		shopt -s lastpipe
+		alladdrs "$ADDR" | while read addr; do
+			if timeout 3 ping -w2 -c1 "$addr" &>/dev/null; then
+				n=$(( $n + 1 ))
+			fi
+		done
+		if [ $n -ge $N ]; then
+			break
+		fi
+		sleep 1
+	done
+	return 0
+}
+
+# a bit of a misnomer: the quorum is ceil((n+1)/2), this gives you all n hosts
+function zkquorum {
+	zk_addr="$1"
+	zk_port="$2"
+	zk_count="$3"
+	waitforhosts "$zk_addr" "$zk_count" 1>&2
+	alladdrs $zk_addr | sed 's/.$/&:'"$zk_port"'/;H;1h;$!d;x; s/\n/,/g'
+}
+
+function hostexists {
+	timeout 3 ping -w2 -c1 "$@"
+	return $?
+}
+
+function waitforport {
+	while ! timeout 1 nc -z "$@" &>/dev/null; do
+		sleep .5
+	done
+}
+
+function waitforhdfs {
+	waitforport hdfsctrl 17928
+	while ! (wget -qO- 'hdfsctrl:17928/status/plain' | grep -qc 'ready=True'); do sleep 1; done
+}
+
+
+export JOB_MANAGER_RPC_ADDRESS=jobmanager
