@@ -58,8 +58,9 @@ services:
   datanode4: *datanode
 
   jobmanager1:
-    build:
+    build: &flinkbuild
       context: flink
+      dockerfile: ${FLINK_DOCKERFILE-Dockerfile}
       args: &proxy
         http_proxy: ${http_proxy}
         https_proxy: ${https_proxy}
@@ -72,9 +73,7 @@ services:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager1
 
   taskmanager1: &taskmanager
-    build:
-      context: flink
-      args: *proxy
+    build: *flinkbuild
     expose:
       - "6121"
       - "6122"

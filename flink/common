@@ -54,4 +54,4 @@ function waitforhdfs {
 }
 
 
-export JOB_MANAGER_RPC_ADDRESS=jobmanager
+export JOB_MANAGER_RPC_ADDRESS=jobmanager1
